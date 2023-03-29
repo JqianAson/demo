@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE configuration
+        PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-config.dtd">
+<configuration>
+    <settings>
+        <!--        <setting name="cacheEnabled" value="true"/>-->
+        <setting name="defaultStatementTimeout" value="60000"/>
+        <setting name="logImpl" value="SLF4J"/>
+        <setting name="defaultEnumTypeHandler" value="com.crointech.activity.infrastructure.GlobalDbTypeEnumHandler"/>
+
+    </settings>
+
+    <typeAliases>
+
+        <package name="com.crointech.activity.domain.model.activity"/>
+        <package name="com.crointech.activity.domain.model.account"/>
+        <package name="com.crointech.activity.domain.model.tradeserver"/>
+        <package name="com.crointech.activity.domain.model.activitybonusdetail"/>
+        <package name="com.crointech.activity.domain.model.order"/>
+        <package name="com.crointech.activity.domain.model.mail"/>
+        <package name="com.crointech.activity.domain.model.recyclingdetail"/>
+        <package name="com.crointech.activity.domain.model.subsidies"/>
+        <package name="com.crointech.activity.domain.model.activitybonusdetail"/>
+        <package name="com.crointech.activity.domain.model.amountdetail"/>
+        <package name="com.crointech.activity.domain.model.jobexedetail"/>
+        <package name="com.crointech.activity.domain.model.merchantserviceinfo"/>
+
+    </typeAliases>
+
+</configuration>

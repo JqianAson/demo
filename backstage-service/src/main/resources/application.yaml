@@ -1,0 +1,213 @@
+spring:
+  profiles:
+    active: local
+  application:
+    name: backstage-service
+    context: backstage-service
+  jackson:
+    date-format: yyyy-MM-dd HH:mm:ss
+    #    time-zone: @app.timezone@
+    time-zone: Africa/Cairo
+
+server:
+  servlet:
+    context-path: /backstage-service
+  multipart:
+    max-file-size: 10MB
+    max-request-size: 100MB
+
+mybatis:
+  config-location: classpath:mybatis/mybatis_configure.xml
+  mapper-locations: classpath:mybatis/mapper/*.xml
+
+feign:
+  client:
+    config:
+      default:
+        # feign调用超时时间，单位：毫秒。readTimeout 和 connectTimeout 必须一起设置
+        readTimeout: 60000
+        connectTimeout: 60000
+  httpclient:
+    enabled: true
+
+pagehelper:
+  reasonable: true
+  supportMethodsArguments: true
+  params: count=countSql
+
+logging:
+  level:
+    com.crointech: debug
+
+#发送邮件接收邮箱
+email:
+  #默认邮件语言
+  default_country: EN
+  #trading
+  trading: trading@startrader.com
+
+system:
+  code: 100001
+
+limit:
+  title: 51
+
+#===================================================================
+# =                          OSS配置                                 =
+# ===================================================================
+#图片上传路径
+img:
+  path: static/images/
+  mall: static/mall/images/
+
+oss:
+  file:
+    endpoint: oss-cn-hongkong.aliyuncs.com
+    access-key-id: LTAI4FcTqG43BTMEG3uEgxaL
+    access-key-secret: XpHCcRGyMgL1dOXjl39GRBz32cI7tV
+    bucket-name: filebucket-marketing
+    file-cache-time: 17280
+
+---
+server:
+  port: 80
+
+spring:
+  profiles: local
+  redis:
+    database: 2
+    #    host: 192.168.1.236
+    host: 127.0.0.1
+    password:
+    port: 6379
+    timeout: 10000
+    jedis:
+      pool:
+        max-idle: 5
+        min-idle: 0
+        max-active: 8
+        max-wait: 1
+
+#数据库配置
+  datasource:
+    type: com.alibaba.druid.pool.DruidDataSource
+    #    schema: classpath:db/ddl-test/*.sql,classpath:db/ddl/*.sql
+    #    data: classpath:db/dml/*.sql,classpath:db/dml-test/*.sql
+    # 配置文件禁止修改该值！！！原因：易造成误删除线上数据！
+    # 如果要初始化本地测试数据，应该在本地测试启动的时候手动指定 --spring.datasource.initialization-mode=ALWAYS
+    initialization-mode: NEVER
+    druid:
+      validation-query: select 1 test
+      url: jdbc:mysql://rm-3nst16551w5c49408jo.mysql.rds.aliyuncs.com:3306/test_marketing_activity?allowPublicKeyRetrieval=true&useSSL=false&characterEncoding=utf8&allowMultiQueries=true
+      username: test_marketing
+      password: FKM$qgyXy9kRs9M
+      driver-class-name: com.mysql.cj.jdbc.Driver
+      initial-size: 5
+      max-active: 20
+      min-idle: 5
+---
+server:
+  port: 80
+
+spring:
+  profiles: dev
+  redis:
+    database: 5
+    host: r-3nspddwfxvvwvzjxl1.redis.rds.aliyuncs.com
+    password:
+    port: 6379
+    timeout: 10000
+    jedis:
+      pool:
+        max-idle: 5
+        min-idle: 0
+        max-active: 8
+        max-wait: 1
+
+  datasource:
+    type: com.alibaba.druid.pool.DruidDataSource
+    #    schema: classpath:db/ddl-test/*.sql,classpath:db/ddl/*.sql
+    #    data: classpath:db/dml/*.sql,classpath:db/dml-test/*.sql
+    # 配置文件禁止修改该值！！！原因：易造成误删除线上数据！
+    # 如果要初始化本地测试数据，应该在本地测试启动的时候手动指定 --spring.datasource.initialization-mode=ALWAYS
+    initialization-mode: NEVER
+    druid:
+      validation-query: select 1 test
+      url: jdbc:mysql://rm-3nst16551w5c49408jo.mysql.rds.aliyuncs.com:3306/dev_marketing_activity?allowPublicKeyRetrieval=true&useSSL=false&characterEncoding=utf8&allowMultiQueries=true
+      username: test_marketing
+      password: FKM$qgyXy9kRs9M
+      driver-class-name: com.mysql.cj.jdbc.Driver
+      initial-size: 5
+      max-active: 20
+      min-idle: 5
+---
+server:
+  port: 80
+
+spring:
+  profiles: test
+  redis:
+    database: 4
+    host: r-3nspddwfxvvwvzjxl1.redis.rds.aliyuncs.com
+    password:
+    port: 6379
+    timeout: 10000
+    jedis:
+      pool:
+        max-idle: 5
+        min-idle: 0
+        max-active: 8
+        max-wait: 1
+
+  datasource:
+    type: com.alibaba.druid.pool.DruidDataSource
+    #    schema: classpath:db/ddl-test/*.sql,classpath:db/ddl/*.sql
+    #    data: classpath:db/dml/*.sql,classpath:db/dml-test/*.sql
+    # 配置文件禁止修改该值！！！原因：易造成误删除线上数据！
+    # 如果要初始化本地测试数据，应该在本地测试启动的时候手动指定 --spring.datasource.initialization-mode=ALWAYS
+    initialization-mode: NEVER
+    druid:
+      validation-query: select 1 test
+      url: jdbc:mysql://rm-3nst16551w5c49408jo.mysql.rds.aliyuncs.com:3306/test_marketing_activity?allowPublicKeyRetrieval=true&useSSL=false&characterEncoding=utf8&allowMultiQueries=true
+      username: test_marketing
+      password: FKM$qgyXy9kRs9M
+      driver-class-name: com.mysql.cj.jdbc.Driver
+      initial-size: 5
+      max-active: 20
+      min-idle: 5
+
+---
+server:
+  port: 80
+
+spring:
+  profiles: prod
+  redis:
+    database: 6
+    host: r-3nsnag47ap7jvsde1m.redis.rds.aliyuncs.com
+    password:
+    port: 6379
+    timeout: 10000
+    jedis:
+      pool:
+        max-idle: 5
+        min-idle: 0
+        max-active: 8
+        max-wait: 1
+
+  datasource:
+    type: com.alibaba.druid.pool.DruidDataSource
+    #    schema: classpath:db/ddl-test/*.sql,classpath:db/ddl/*.sql
+    #    data: classpath:db/dml/*.sql,classpath:db/dml-test/*.sql
+    # 配置文件禁止修改该值！！！原因：易造成误删除线上数据！
+    # 如果要初始化本地测试数据，应该在本地测试启动的时候手动指定 --spring.datasource.initialization-mode=ALWAYS
+    initialization-mode: NEVER
+    druid:
+      validation-query: select 1 test
+      url: jdbc:mysql://oj6c52obvb5wqbomcayp.rwlb.rds.aliyuncs.com:3306/db_marketing?allowPublicKeyRetrieval=true&useSSL=false&characterEncoding=utf8&allowMultiQueries=true
+      username: icn_marketing_rw
+      password: bhcNGDN2CKnlBBJ4sI
+      driver-class-name: com.mysql.cj.jdbc.Driver
+      initial-size: 5
+      max-active: 20
+      min-idle: 5
